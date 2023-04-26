@@ -31,7 +31,7 @@ std::string AND(std::string binary1, std::string binary2)
 
     std::string result;
 
-    for (int i = 1; i <= binary1.size(); i++)
+    for (int i = 0; i < binary1.size(); i++)
     {
         if (binary1[i] == '1' & binary2[i] == '1')
         {
@@ -52,7 +52,7 @@ std::string OR(std::string binary1, std::string binary2)
 
     std::string result;
 
-    for (int i = 1; i <= binary1.size(); i++)
+    for (int i = 0; i < binary1.size(); i++)
     {
         if (binary1[i] == '1' || binary2[i] == '1')
         {
