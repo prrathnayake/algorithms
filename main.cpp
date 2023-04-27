@@ -4,5 +4,5 @@
 
 int main()
 {
-    blockDecomposition(toBinary("abc"));
+    hashComputation(toBinary("abc"));
 }
