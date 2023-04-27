@@ -25,6 +25,18 @@ void sizeValidate(std::string *binary1, std::string *binary2)
     }
 }
 
+void size32Validate(std::string *binary)
+{
+    std::string add;
+    int len = binary->size();
+
+    for (int i = 0; i < (32 - len); i++)
+    {
+        add += "0";
+    }
+    *binary = add + *binary;
+}
+
 std::string AND(std::string binary1, std::string binary2)
 {
     sizeValidate(&binary1, &binary2);
@@ -82,6 +94,27 @@ std::string XNOR(std::string binary1, std::string binary2)
         else
         {
             result += '0';
+        }
+    }
+
+    return result;
+}
+
+std::string XOR(std::string binary1, std::string binary2)
+{
+    sizeValidate(&binary1, &binary2);
+
+    std::string result;
+
+    for (int i = 1; i <= binary1.size(); i++)
+    {
+        if (binary1[i] == binary2[i])
+        {
+            result += '0';
+        }
+        else
+        {
+            result += '1';
         }
     }
 
