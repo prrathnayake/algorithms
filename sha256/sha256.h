@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "formulas.h"
+#include "conversions.h"
 
 std::string K[64] = {"0x428a2f98", "0x71374491", "0xb5c0fbcf", "0xe9b5dba5", "0x3956c25b", "0x59f111f1", "0x923f82a4", "0xab1c5ed5",
                      "0xd807aa98", "0x12835b01", "0x243185be", "0x550c7dc3", "0x72be5d74", "0x80deb1fe", "0x9bdc06a7", "0xc19bf174",
@@ -15,19 +16,23 @@ std::string K[64] = {"0x428a2f98", "0x71374491", "0xb5c0fbcf", "0xe9b5dba5", "0x
 
 std::string padding(std::string binary)
 {
+    int binarySize = binary.size();
     binary += "1";
     int k = 448 - binary.size();
     for (int i = 0; i < k; i++)
     {
         binary += "0";
     }
-    std::string length = toBinary(std::to_string(binary.size()));
+
+    std::string length = decimalToBinary(binarySize);
+
     int len = 64 - length.size();
     for (int i = 0; i < len; i++)
     {
         binary += "0";
     }
     binary += length;
+
     return binary;
 }
 

@@ -4,5 +4,5 @@
 
 int main()
 {
-    blockDecomposition(toBinary("hello, world!"));
+    blockDecomposition(toBinary("abc"));
 }
