@@ -62,11 +62,9 @@ void blockDecomposition(std::string binary)
             std::cout << words[j] << "\n";
         }
 
-        std::cout << "======================================================"
-                  << "\n";
         for (int j = 16; j < 63; j++)
         {
-            words.push_back(additionModulo(additionModulo(σ1(words[j - 2]), words[j - 7]), additionModulo(σ0(words[j - 15]), words[j - 7])));
+            words.push_back(additionModulo(additionModulo(σ1(words[j - 2]), words[j - 7]), additionModulo(σ0(words[j - 15]), words[j - 16])));
             std::cout << words[j] << "\n";
         }
     }

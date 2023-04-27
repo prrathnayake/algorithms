@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
 #include <bitset>
+#include <cmath>
 
 #include "binaryOperators.h"
 #include "common.h"
+#include "conversions.h"
 
 std::string ShaR(std::string binary, int value)
 {
@@ -69,18 +71,14 @@ std::string σ1(std::string binary)
 std::string additionModulo(std::string x, std::string y)
 {
     std::bitset<32> bits1(x);
-    int xInt = bits1.to_ulong();
+    unsigned int xInt = bits1.to_ulong();
 
     std::bitset<32> bits2(y);
-    int yInt = bits2.to_ulong();
+    unsigned int yInt = bits2.to_ulong();
 
-    int result = (xInt + yInt) % (2 ^ 32);
+    int result = (xInt + yInt) % int(pow(2, 32));
 
-    // std::cout << xInt << " \n";
-    // std::cout << yInt << " \n";
-    // std::cout << result << " \n";
-
-    std::string binary = toBinary(std::to_string(result));
+    std::string binary = decimalToBinary(result);
     size32Validate(&binary);
     return binary;
 }
