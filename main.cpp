@@ -4,5 +4,6 @@
 
 int main()
 {
-    hashComputation(toBinary("abc"));
+    std::string hash = hashComputation(toBinary("abc"));
+    std::cout << hash << "\n";
 }

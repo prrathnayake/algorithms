@@ -85,7 +85,7 @@ std::string XNOR(std::string binary1, std::string binary2)
 
     std::string result;
 
-    for (int i = 1; i <= binary1.size(); i++)
+    for (int i = 0; i < binary1.size(); i++)
     {
         if (binary1[i] == binary2[i])
         {
@@ -104,9 +104,9 @@ std::string XOR(std::string binary1, std::string binary2)
 {
     sizeValidate(&binary1, &binary2);
 
-    std::string result;
+    std::string result = "";
 
-    for (int i = 1; i <= binary1.size(); i++)
+    for (int i = 0; i < binary1.size(); i++)
     {
         if (binary1[i] == binary2[i])
         {
@@ -125,7 +125,7 @@ std::string NOT(std::string binary)
 {
     std::string result;
 
-    for (int i = 1; i <= binary.size(); i++)
+    for (int i = 0; i < binary.size(); i++)
     {
         if (binary[i] == '1')
         {

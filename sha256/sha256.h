@@ -15,14 +15,7 @@ std::string K[64] = {"0x428a2f98", "0x71374491", "0xb5c0fbcf", "0xe9b5dba5", "0x
                      "0x19a4c116", "0x1e376c08", "0x2748774c", "0x34b0bcb5", "0x391c0cb3", "0x4ed8aa4a", "0x5b9cca4f", "0x682e6ff3",
                      "0x748f82ee", "0x78a5636f", "0x84c87814", "0x8cc70208", "0x90befffa", "0xa4506ceb", "0xbef9a3f7", "0xc67178f2"};
 
-std::string H[8] = {"0x6a09e667",
-                    "0xbb67ae85",
-                    "0x3c6ef372",
-                    "0xa54ff53a",
-                    "0x510e527f",
-                    "0x9b05688c",
-                    "0x1f83d9ab",
-                    "0x5be0cd19"};
+std::string H[8] = {"0x6a09e667", "0xbb67ae85", "0x3c6ef372", "0xa54ff53a", "0x510e527f", "0x9b05688c", "0x1f83d9ab", "0x5be0cd19"};
 
 std::string padding(std::string binary)
 {
@@ -46,9 +39,9 @@ std::string padding(std::string binary)
     return binary;
 }
 
-std::map<int, std::vector<std::string>> blockDecomposition(std::string binary)
+std::vector<std::vector<std::string>> blockDecomposition(std::string binary)
 {
-    std::map<int, std::vector<std::string>> map;
+    std::vector<std::vector<std::string>> blocksAndWords;
     binary = padding(binary);
     std::vector<std::string> blocks;
     int len = binary.size();
@@ -70,33 +63,65 @@ std::map<int, std::vector<std::string>> blockDecomposition(std::string binary)
             hash.copy(buffer, 32, 0);
             hash.erase(0, 32);
             words.push_back(std::string(buffer, 32));
-            std::cout << words[j] << "\n";
         }
 
-        for (int j = 16; j < 63; j++)
+        for (int j = 16; j < 64; j++)
         {
             words.push_back(additionModulo(additionModulo(sigma1(words[j - 2]), words[j - 7]), additionModulo(sigma0(words[j - 15]), words[j - 16])));
-            std::cout << words[j] << "\n";
         }
-        map[i] = words;
+        blocksAndWords.push_back(words);
     }
-    return map;
+    return blocksAndWords;
 }
 
-void hashComputation(std::string binary)
+std::string hashComputation(std::string binary)
 {
-    std::map<int, std::vector<std::string>> blocks = blockDecomposition(binary);
-    std::string a=H[0];
-    std::string b=H[1];
-    std::string c=H[2];
-    std::string d=H[3];
-    std::string e=H[4];
-    std::string f=H[5];
-    std::string g=H[6];
-    std::string h=H[7];
+    std::vector<std::vector<std::string>> blocks = blockDecomposition(binary);
+    std::string a;
+    std::string b;
+    std::string c;
+    std::string d;
+    std::string e;
+    std::string f;
+    std::string g;
+    std::string h;
 
-    for(auto &pair : blocks){
-        std::string a=H[0];
+    std::string T1;
+    std::string T2;
 
+    for (int i = 0; i < blocks.size(); i++)
+    {
+        a = hexToBinary(H[0]);
+        b = hexToBinary(H[1]);
+        c = hexToBinary(H[2]);
+        d = hexToBinary(H[3]);
+        e = hexToBinary(H[4]);
+        f = hexToBinary(H[5]);
+        g = hexToBinary(H[6]);
+        h = hexToBinary(H[7]);
+        for (int j = 0; j < 1; j++)
+        {
+            T1 = additionModulo(additionModulo(additionModulo(additionModulo(h, Sigma1(e)), Ch(e, f, g)), hexToBinary(K[j])), blocks[i][j]);
+            T2 = additionModulo(Sigma0(a), Maj(a, b, c));
+            h = g;
+            g = f;
+            f = e;
+            e = additionModulo(d, T1);
+            d = c;
+            c = b;
+            b = a;
+            a = additionModulo(T1, T2);
+    std::cout << a << "\n";
+
+        }
+        H[0] = binaryToHex(additionModulo(hexToBinary(H[0]), a));
+        H[1] = binaryToHex(additionModulo(hexToBinary(H[1]), b));
+        H[2] = binaryToHex(additionModulo(hexToBinary(H[2]), c));
+        H[3] = binaryToHex(additionModulo(hexToBinary(H[3]), d));
+        H[4] = binaryToHex(additionModulo(hexToBinary(H[4]), e));
+        H[5] = binaryToHex(additionModulo(hexToBinary(H[5]), f));
+        H[6] = binaryToHex(additionModulo(hexToBinary(H[6]), g));
+        H[7] = binaryToHex(additionModulo(hexToBinary(H[7]), h));
     }
+    return H[0] + H[1] + H[2] + H[3] + H[4] + H[5] + H[6] + H[7];
 }

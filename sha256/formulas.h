@@ -50,12 +50,12 @@ std::string RotR(std::string binary, int value)
 
 std::string Sigma0(std::string binary)
 {
-    return XOR(XOR(RotR(binary, 2), RotR(binary, 13)), ShaR(binary, 22));
+    return XOR(XOR(RotR(binary, 2), RotR(binary, 13)), RotR(binary, 22));
 }
 
 std::string Sigma1(std::string binary)
 {
-    return XOR(XOR(RotR(binary, 6), RotR(binary, 11)), ShaR(binary, 25));
+    return XOR(XOR(RotR(binary, 6), RotR(binary, 11)), RotR(binary, 25));
 }
 
 std::string sigma0(std::string binary)
@@ -85,7 +85,7 @@ std::string additionModulo(std::string x, std::string y)
 
 std::string Ch(std::string x, std::string y, std::string z)
 {
-    return XOR(AND(x, y), OR(NOT(x), z));
+    return XOR(AND(x, y), AND(NOT(x), z));
 }
 
 std::string Maj(std::string x, std::string y, std::string z)
