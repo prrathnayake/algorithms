@@ -82,3 +82,13 @@ std::string additionModulo(std::string x, std::string y)
     size32Validate(&binary);
     return binary;
 }
+
+std::string Ch(std::string x, std::string y, std::string z)
+{
+    return XOR(AND(x, y), OR(NOT(x), z));
+}
+
+std::string Maj(std::string x, std::string y, std::string z)
+{
+    return XOR(XOR(AND(x, y), AND(x, z)), AND(y, z));
+}
