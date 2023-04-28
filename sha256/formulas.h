@@ -48,22 +48,22 @@ std::string RotR(std::string binary, int value)
     return binary;
 }
 
-std::string Σ0(std::string binary)
+std::string Sigma0(std::string binary)
 {
     return XOR(XOR(RotR(binary, 2), RotR(binary, 13)), ShaR(binary, 22));
 }
 
-std::string Σ1(std::string binary)
+std::string Sigma1(std::string binary)
 {
     return XOR(XOR(RotR(binary, 6), RotR(binary, 11)), ShaR(binary, 25));
 }
 
-std::string σ0(std::string binary)
+std::string sigma0(std::string binary)
 {
     return XOR(XOR(RotR(binary, 7), RotR(binary, 18)), ShaR(binary, 3));
 }
 
-std::string σ1(std::string binary)
+std::string sigma1(std::string binary)
 {
     return XOR(XOR(RotR(binary, 17), RotR(binary, 19)), ShaR(binary, 10));
 }
