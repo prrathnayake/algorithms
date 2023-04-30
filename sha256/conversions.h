@@ -41,7 +41,7 @@ std::string decimalToBinary(int n)
     return binary;
 }
 
-std::string decimalToBinary(long n)
+std::string decimalToBinary(unsigned long n)
 {
     std::string binary = "";
     std::string tem = "";

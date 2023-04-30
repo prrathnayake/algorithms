@@ -51,12 +51,12 @@ std::string RotR(std::string binary, int value)
 std::string additionModulo(std::string x, std::string y)
 {
     std::bitset<32> bits1(x);
-    unsigned int xInt = bits1.to_ulong();
+    unsigned long xInt = bits1.to_ulong();
 
     std::bitset<32> bits2(y);
-    unsigned int yInt = bits2.to_ulong();
+    unsigned long yInt = bits2.to_ulong();
 
-    long result = long(xInt + yInt) % 4294967296;
+    unsigned long result = xInt + yInt % 4294967296;
 
     std::string binary = decimalToBinary(result);
     size32Validate(&binary);
