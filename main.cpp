@@ -2,12 +2,14 @@
 
 #include "sha256/index.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::string hash = hashComputation(toBinary("abc"));
-    std::cout << hash << "\n";
-    // std::cout << additionModulo("01010100110110100101000011101010","01100001011000100110001110000000") << "\n";
+    std::string hash = hashComputation(toBinary(argv[1]));
 
-    // std::cout << ShaR("01010100110110100101000011101010",1).size() << "\n";
-
+    if(hash == argv[2]){
+        std::cout << "test passed\n";
+    }else{
+        std::cout << "test failed\n";
+    }
+    return 0;
 }

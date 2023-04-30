@@ -102,15 +102,6 @@ std::string hashComputation(std::string binary)
             b = a;
             a = additionModulo(T1, T2);
         }
-        std::cout << a << "\n";
-        std::cout << b << "\n";
-        std::cout << c << "\n";
-        std::cout << d << "\n";
-        std::cout << e << "\n";
-        std::cout << f << "\n";
-        std::cout << g << "\n";
-        std::cout << h << "\n\n";
-
         H[0] = binaryToHex(additionModulo(hexToBinary(H[0]), a));
         H[1] = binaryToHex(additionModulo(hexToBinary(H[1]), b));
         H[2] = binaryToHex(additionModulo(hexToBinary(H[2]), c));
