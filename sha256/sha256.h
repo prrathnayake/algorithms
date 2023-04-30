@@ -77,31 +77,23 @@ std::vector<std::vector<std::string>> blockDecomposition(std::string binary)
 std::string hashComputation(std::string binary)
 {
     std::vector<std::vector<std::string>> blocks = blockDecomposition(binary);
-    std::string a;
-    std::string b;
-    std::string c;
-    std::string d;
-    std::string e;
-    std::string f;
-    std::string g;
-    std::string h;
+    std::string a, b, c, d, e, f, g, h, T1, T2;
 
-    std::string T1;
-    std::string T2;
+    a = hexToBinary(H[0]);
+    b = hexToBinary(H[1]);
+    c = hexToBinary(H[2]);
+    d = hexToBinary(H[3]);
+    e = hexToBinary(H[4]);
+    f = hexToBinary(H[5]);
+    g = hexToBinary(H[6]);
+    h = hexToBinary(H[7]);
 
     for (int i = 0; i < blocks.size(); i++)
     {
-        a = hexToBinary(H[0]);
-        b = hexToBinary(H[1]);
-        c = hexToBinary(H[2]);
-        d = hexToBinary(H[3]);
-        e = hexToBinary(H[4]);
-        f = hexToBinary(H[5]);
-        g = hexToBinary(H[6]);
-        h = hexToBinary(H[7]);
-        for (int j = 0; j < 1; j++)
+
+        for (int j = 0; j < blocks[i].size(); j++)
         {
-            T1 = additionModulo(additionModulo(additionModulo(additionModulo(h, Sigma1(e)), Ch(e, f, g)), hexToBinary(K[j])), blocks[i][j]);
+            T1 = additionModulo(additionModulo(additionModulo(additionModulo(Ch(e, f, g), Sigma1(e)), h), hexToBinary(K[j])), blocks[i][j]);
             T2 = additionModulo(Sigma0(a), Maj(a, b, c));
             h = g;
             g = f;
@@ -111,17 +103,34 @@ std::string hashComputation(std::string binary)
             c = b;
             b = a;
             a = additionModulo(T1, T2);
-    std::cout << a << "\n";
-
         }
-        H[0] = binaryToHex(additionModulo(hexToBinary(H[0]), a));
-        H[1] = binaryToHex(additionModulo(hexToBinary(H[1]), b));
-        H[2] = binaryToHex(additionModulo(hexToBinary(H[2]), c));
-        H[3] = binaryToHex(additionModulo(hexToBinary(H[3]), d));
-        H[4] = binaryToHex(additionModulo(hexToBinary(H[4]), e));
-        H[5] = binaryToHex(additionModulo(hexToBinary(H[5]), f));
-        H[6] = binaryToHex(additionModulo(hexToBinary(H[6]), g));
-        H[7] = binaryToHex(additionModulo(hexToBinary(H[7]), h));
+        std::cout << a << "\n";
+        std::cout << b << "\n";
+        std::cout << c << "\n";
+        std::cout << d << "\n";
+        std::cout << e << "\n";
+        std::cout << f << "\n";
+        std::cout << g << "\n";
+        std::cout << h << "\n\n";
+
+        a = binaryToHex(additionModulo(hexToBinary(H[0]), a));
+        b = binaryToHex(additionModulo(hexToBinary(H[1]), b));
+        c = binaryToHex(additionModulo(hexToBinary(H[2]), c));
+        d = binaryToHex(additionModulo(hexToBinary(H[3]), d));
+        e = binaryToHex(additionModulo(hexToBinary(H[4]), e));
+        f = binaryToHex(additionModulo(hexToBinary(H[5]), f));
+        g = binaryToHex(additionModulo(hexToBinary(H[6]), g));
+        h = binaryToHex(additionModulo(hexToBinary(H[7]), h));
+
+        std::cout << hexToBinary(a) << "\n";
+        std::cout << hexToBinary(b) << "\n";
+        std::cout << hexToBinary(c) << "\n";
+        std::cout << hexToBinary(d) << "\n";
+        std::cout << hexToBinary(e) << "\n";
+        std::cout << hexToBinary(f) << "\n";
+        std::cout << hexToBinary(g) << "\n";
+        std::cout << hexToBinary(h) << "\n";
     }
-    return H[0] + H[1] + H[2] + H[3] + H[4] + H[5] + H[6] + H[7];
+
+    return a + b + c + d + e + f + g + h;
 }

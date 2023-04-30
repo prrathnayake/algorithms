@@ -48,26 +48,6 @@ std::string RotR(std::string binary, int value)
     return binary;
 }
 
-std::string Sigma0(std::string binary)
-{
-    return XOR(XOR(RotR(binary, 2), RotR(binary, 13)), RotR(binary, 22));
-}
-
-std::string Sigma1(std::string binary)
-{
-    return XOR(XOR(RotR(binary, 6), RotR(binary, 11)), RotR(binary, 25));
-}
-
-std::string sigma0(std::string binary)
-{
-    return XOR(XOR(RotR(binary, 7), RotR(binary, 18)), ShaR(binary, 3));
-}
-
-std::string sigma1(std::string binary)
-{
-    return XOR(XOR(RotR(binary, 17), RotR(binary, 19)), ShaR(binary, 10));
-}
-
 std::string additionModulo(std::string x, std::string y)
 {
     std::bitset<32> bits1(x);
@@ -76,7 +56,7 @@ std::string additionModulo(std::string x, std::string y)
     std::bitset<32> bits2(y);
     unsigned int yInt = bits2.to_ulong();
 
-    int result = (xInt + yInt) % int(pow(2, 32));
+    long result = long(xInt + yInt) % 4294967296;
 
     std::string binary = decimalToBinary(result);
     size32Validate(&binary);
@@ -91,4 +71,25 @@ std::string Ch(std::string x, std::string y, std::string z)
 std::string Maj(std::string x, std::string y, std::string z)
 {
     return XOR(XOR(AND(x, y), AND(x, z)), AND(y, z));
+}
+
+std::string Sigma0(std::string binary)
+{
+    return XOR(XOR(RotR(binary, 2), RotR(binary, 13)), RotR(binary, 22));
+}
+
+std::string Sigma1(std::string binary)
+{
+
+    return XOR(XOR(RotR(binary, 6), RotR(binary, 11)), RotR(binary, 25));
+}
+
+std::string sigma0(std::string binary)
+{
+    return XOR(XOR(RotR(binary, 7), RotR(binary, 18)), ShaR(binary, 3));
+}
+
+std::string sigma1(std::string binary)
+{
+    return XOR(XOR(RotR(binary, 17), RotR(binary, 19)), ShaR(binary, 10));
 }

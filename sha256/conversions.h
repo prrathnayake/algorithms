@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <bitset>
+#include <map>
 
 std::map<std::string, char> binaryToHexMap = {
     {"0000", '0'},
@@ -22,6 +23,25 @@ std::map<std::string, char> binaryToHexMap = {
     {"1111", 'f'}};
 
 std::string decimalToBinary(int n)
+{
+    std::string binary = "";
+    std::string tem = "";
+
+    while (n > 0)
+    {
+        tem += std::to_string(n % 2);
+        n = n / 2;
+    }
+
+    for (int i = (tem.size() - 1); i >= 0; i--)
+    {
+        binary += tem[i];
+    }
+
+    return binary;
+}
+
+std::string decimalToBinary(long n)
 {
     std::string binary = "";
     std::string tem = "";
