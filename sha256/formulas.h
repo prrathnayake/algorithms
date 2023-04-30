@@ -10,9 +10,10 @@
 std::string ShaR(std::string binary, int value)
 {
     std::string add = "";
+
     if (binary.size() > value)
     {
-        binary.erase(binary.size() - (value + 1), value);
+        binary.erase(binary.size() - (value), value);
 
         for (int i = 0; i < value; i++)
         {
@@ -56,10 +57,11 @@ std::string additionModulo(std::string x, std::string y)
     std::bitset<32> bits2(y);
     unsigned long yInt = bits2.to_ulong();
 
-    unsigned long result = xInt + yInt % 4294967296;
+    unsigned long result = (xInt + yInt) % 4294967296;
 
     std::string binary = decimalToBinary(result);
     size32Validate(&binary);
+
     return binary;
 }
 
@@ -80,7 +82,6 @@ std::string Sigma0(std::string binary)
 
 std::string Sigma1(std::string binary)
 {
-
     return XOR(XOR(RotR(binary, 6), RotR(binary, 11)), RotR(binary, 25));
 }
 

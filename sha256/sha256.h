@@ -67,7 +67,7 @@ std::vector<std::vector<std::string>> blockDecomposition(std::string binary)
 
         for (int j = 16; j < 64; j++)
         {
-            words.push_back(additionModulo(additionModulo(sigma1(words[j - 2]), words[j - 7]), additionModulo(sigma0(words[j - 15]), words[j - 16])));
+            words.push_back(additionModulo(additionModulo(additionModulo(sigma1(words[j - 2]), words[j - 7]), (sigma0(words[j - 15]))), words[j - 16]));
         }
         blocksAndWords.push_back(words);
     }
