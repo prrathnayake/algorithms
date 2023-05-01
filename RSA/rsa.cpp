@@ -6,18 +6,22 @@
 
 int getRamdomPrimeNumber()
 {
-    int prime[46] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199};
-    int RandIndex = rand() % 46;
+    int prime[10] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
+    int RandIndex = rand() % 10;
     return prime[RandIndex];
 }
 
 long long unsigned encription(int d, int n)
 {
-    return power(31, d) % n;
+    std::cout << " power : " << power(11, d) << "\n";
+
+    return power(11, d) % n;
 }
 
 long long unsigned dencription(int c, int e, int n)
 {
+    std::cout << " power : " << power(c, e) << "\n";
+
     return power(c, e) % n;
 }
 
@@ -36,8 +40,8 @@ void generateKeys()
     //     }
     // }
 
-    p = 7;
-    q = 3;
+    p = 3;
+    q = 13;
 
     n = p * q;
 
